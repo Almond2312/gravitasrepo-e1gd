@@ -24,6 +24,10 @@ public class blockscr : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("ground"))
+        {
+            return;
+        }
         Touch--;
     }
 
