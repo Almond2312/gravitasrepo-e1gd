@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class GravityManager : MonoBehaviour
 {
-    //black magic
+    //for the awake function
     public static GravityManager Instance;
+    //public static event System.Action<Vector2> OnGravityChanged;
+
 
     public Vector2 gravity = Vector2.down;
-
     [SerializeField] private float gravStrength = -27f;
 
     private void Awake()
@@ -18,8 +19,7 @@ public class GravityManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-        //more black magic
+        }//make sure there is never more than one gravity manager
         Physics2D.gravity = gravity * gravStrength;
     }
 
