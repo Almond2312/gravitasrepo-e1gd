@@ -7,15 +7,18 @@ public class gravchangerscr : MonoBehaviour
         GravityManager.Instance.setGravity(dir);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!other.CompareTag("Player"))
+        if(!collision.collider.CompareTag("Player"))
         {
             return;
         }
 
-        //'other' at this point is the player. the transformposition of the player - of the grav changer gives vector from block to player
-        Vector2 d = other.transform.position - transform.position;
+        //'collision' at this point is the player. the get contact(0) is the first point where the player hits the grav changer.
+        //the normal is the unit vector perpendicular direction between them
+        ContactPoint2D contact = collision.GetContact(0);
+        Vector2 d = contact.normal;
+
 
         //since it isn't possible to be inside the grav changer, the only way for d.x or d.y to be <1 is if the player is not approaching from that side
         //say aligned exactly on the x axis but then exactly 1 away on the y. thus is d.y > d.x, the player is approaching from y. the larger vector portion
@@ -25,22 +28,22 @@ public class gravchangerscr : MonoBehaviour
             //now that it is set that the approach is from the x axis, just check the sign and that will be left or right.
             if (d.x > 0)
             {
-                gravChange(Vector2.left);//ai actually got this part wrong, gravity needs to be the opposite of approach not same :)
+                gravChange(Vector2.right);//ai actually got this part wrong, gravity needs to be the opposite of approach not same :)
             }
             else
             {
-                gravChange(Vector2.right);
+                gravChange(Vector2.left);
             }
         }
-        else
+        else if (Mathf.Abs(d.x) < Mathf.Abs(d.y))
         {
-            if (d.y > 0) 
+            if (d.y > 0)
             {
-                gravChange(Vector2.down);
+                gravChange(Vector2.up);
             }
             else
             {
-                gravChange(Vector2.up);
+            gravChange(Vector2.down);
             }//ifelse2
         }//ifelse1
     }//ontrigger
