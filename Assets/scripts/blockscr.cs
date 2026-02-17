@@ -35,14 +35,13 @@ public class blockscr : MonoBehaviour
         */
     }
 
-    // Update is called once per frame
+    /*
     void FixedUpdate()
     {
-        /*
         if (Touch > 0)
         {
                 rb.linearVelocity = Vector2.zero;
         }
-        */
     }
+    */
 }

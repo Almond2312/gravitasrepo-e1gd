@@ -31,7 +31,7 @@ public class playerscr : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 down = GravityManager.Instance.gravity;
+        Vector2 down = GravityManager.Instance.relativeDown;
         Vector2 right = Vector2.Perpendicular(down);
 
         Vector2 h = right * (movex * speed);
@@ -59,7 +59,7 @@ public class playerscr : MonoBehaviour
         //yump
         if (timer > 0f && movey > 0)
         {
-            Vector2 jd = -GravityManager.Instance.gravity;
+            Vector2 jd = -GravityManager.Instance.relativeDown;
             rb.linearVelocity = jd * jump;
         }
         AlignToGravity();
@@ -76,7 +76,7 @@ public class playerscr : MonoBehaviour
     void AlignToGravity()
     {
         //current relative down
-        Vector2 down = GravityManager.Instance.gravity;
+        Vector2 down = GravityManager.Instance.relativeDown;
 
         //gets radian angle and makes degrees, then finally adds 90 since tan^-1 is rotated
         float angle = Mathf.Atan2(down.y, down.x) * Mathf.Rad2Deg + 90f;

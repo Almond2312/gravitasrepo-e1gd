@@ -7,7 +7,11 @@ public class GravityManager : MonoBehaviour
     //public static event System.Action<Vector2> OnGravityChanged;
 
 
-    public Vector2 gravity = Vector2.down;
+    public Vector2 relativeUp;
+    public Vector2 relativeDown;
+    public Vector2 relativeLeft;
+    public Vector2 relativeRight;
+
     [SerializeField] private float gravStrength = -27f;
 
     private void Awake()
@@ -20,13 +24,26 @@ public class GravityManager : MonoBehaviour
         {
             Destroy(gameObject);
         }//make sure there is never more than one gravity manager
-        Physics2D.gravity = gravity * gravStrength;
+    }
+
+    private void Start()
+    {
+        //instantiation after awake to ensure that the gravmanager exists before values are set
+        relativeDown = Vector2.down;
+        relativeUp = Vector2.up;
+        relativeLeft = Vector2.left;
+        relativeRight = Vector2.right;
+        Physics2D.gravity = relativeDown * gravStrength;
     }
 
     public void setGravity(Vector2 dir)
     {
-        gravity = dir;
-        Physics2D.gravity = gravity * gravStrength;
+        dir = dir.normalized;//sometimes funny business happens.
+        relativeDown = dir;//proud i came up with public relative directions will be super useful
+        relativeUp = -dir;
+        relativeLeft = Vector2.Perpendicular(dir);
+        relativeRight = -relativeLeft;
+        Physics2D.gravity = relativeDown * gravStrength;
     }
 
 }
