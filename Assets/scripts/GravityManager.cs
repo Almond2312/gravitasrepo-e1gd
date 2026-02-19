@@ -41,7 +41,7 @@ public class GravityManager : MonoBehaviour
         dir = dir.normalized;//sometimes funny business happens.
         relativeDown = dir;//proud i came up with public relative directions will be super useful
         relativeUp = -dir;
-        relativeLeft = Vector2.Perpendicular(dir);
+        relativeLeft = -Vector2.Perpendicular(dir);
         relativeRight = -relativeLeft;
         Physics2D.gravity = relativeDown * gravStrength;
     }

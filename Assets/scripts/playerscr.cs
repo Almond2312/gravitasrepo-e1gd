@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 //testpush
 public class playerscr : MonoBehaviour
 {
@@ -31,20 +32,22 @@ public class playerscr : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 down = GravityManager.Instance.relativeDown;
-        Vector2 right = Vector2.Perpendicular(down);
+        Debug.DrawLine(
+            transform.position,
+            groundCheck.position,
+            Color.red
+        );
+        Debug.DrawRay(
+            groundCheck.position,
+            GravityManager.Instance.relativeDown,
+            Color.blue
+        );
+        //horizontal motion, horizontal is calculated, vertical is same
+        rb.linearVelocity = (GravityManager.Instance.relativeRight * (movex * speed)) + (GravityManager.Instance.relativeDown * Vector2.Dot(rb.linearVelocity, GravityManager.Instance.relativeDown));
 
-        Vector2 h = right * (movex * speed);
-        Vector2 v = down * Vector2.Dot(rb.linearVelocity, down);
-
-        rb.linearVelocity = h + v;
-
-        //regular walk
-        //rb.linearVelocity = new Vector2(movex * speed, rb.linearVelocity.y);
-
-        //grounded needs fixing with various orientations
+        //fancy way to do grounding according to ai
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
-        if (grounded)
+        if (grounded)//look at later
         {
             timer = coyote;
         }
@@ -56,10 +59,12 @@ public class playerscr : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(timer + " " + movey + " " + grounded);
         //yump
         if (timer > 0f && movey > 0)
         {
-            Vector2 jd = -GravityManager.Instance.relativeDown;
+            Debug.Log("jump");
+            Vector2 jd = GravityManager.Instance.relativeUp;
             rb.linearVelocity = jd * jump;
         }
         AlignToGravity();
@@ -75,12 +80,10 @@ public class playerscr : MonoBehaviour
 
     void AlignToGravity()
     {
-        //current relative down
-        Vector2 down = GravityManager.Instance.relativeDown;
+        //gets radian angle of the new down and makes it degrees.
+        float angle = Mathf.Atan2(GravityManager.Instance.relativeUp.y, GravityManager.Instance.relativeUp.x) * Mathf.Rad2Deg - 90f;
 
-        //gets radian angle and makes degrees, then finally adds 90 since tan^-1 is rotated
-        float angle = Mathf.Atan2(down.y, down.x) * Mathf.Rad2Deg + 90f;
-
+        //rotates the player instantly to gravity angle
         //darker than black magic, practically necromancy
         //unity uses quaternions, quaternion.euler is just putting the sensible angle from earlier into the nonsense
         transform.rotation = Quaternion.Euler(0, 0, angle);

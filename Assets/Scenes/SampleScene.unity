@@ -240,7 +240,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 14624362}
   - {fileID: 1434235042}
+  - {fileID: 206975077}
   - {fileID: 320624985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -278,7 +280,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 206975077}
   - {fileID: 2015447663}
   m_Father: {fileID: 171193515}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1543,7 +1544,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebfb5723534f6740a71e9ef0d7f7c47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gravity: {x: 0, y: -1}
+  relativeUp: {x: 0, y: 0}
+  relativeDown: {x: 0, y: 0}
+  relativeLeft: {x: 0, y: 0}
+  relativeRight: {x: 0, y: 0}
   gravStrength: 27
 --- !u!4 &1268165752
 Transform:
@@ -1765,7 +1769,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 14624362}
   - {fileID: 383622300}
   - {fileID: 874152103}
   - {fileID: 1541708789}
@@ -4490,15 +4493,15 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1434235042}
+    m_TransformParent: {fileID: 171193515}
     m_Modifications:
     - target: {fileID: 4377588335877861210, guid: 35358780ccce5494e9f78e39bb53459a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.5
+      value: -23.34116
       objectReference: {fileID: 0}
     - target: {fileID: 4377588335877861210, guid: 35358780ccce5494e9f78e39bb53459a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.5
+      value: 6.67481
       objectReference: {fileID: 0}
     - target: {fileID: 4377588335877861210, guid: 35358780ccce5494e9f78e39bb53459a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4550,7 +4553,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 320624985}
+    m_TransformParent: {fileID: 171193515}
     m_Modifications:
     - target: {fileID: 1707217715311013124, guid: f5ffbc8d5f21ba64b8d2e7c953c3d1f7, type: 3}
       propertyPath: m_Constraints
@@ -4566,11 +4569,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187128704248775042, guid: f5ffbc8d5f21ba64b8d2e7c953c3d1f7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23
+      value: -25.9823
       objectReference: {fileID: 0}
     - target: {fileID: 3187128704248775042, guid: f5ffbc8d5f21ba64b8d2e7c953c3d1f7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7
+      value: -4.52944
       objectReference: {fileID: 0}
     - target: {fileID: 3187128704248775042, guid: f5ffbc8d5f21ba64b8d2e7c953c3d1f7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4606,7 +4609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7541291893850230485, guid: f5ffbc8d5f21ba64b8d2e7c953c3d1f7, type: 3}
       propertyPath: m_Name
-      value: pushblock
+      value: pushblock original
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

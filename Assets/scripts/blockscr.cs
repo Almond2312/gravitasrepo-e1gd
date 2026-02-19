@@ -10,7 +10,7 @@ public class blockscr : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with: " + collision.gameObject.name);
+        //Debug.Log("Collided with: " + collision.gameObject.name);
         rb.linearVelocity = Vector2.zero;
         /*
         if (collision.collider.CompareTag("ground"))
