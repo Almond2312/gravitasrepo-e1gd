@@ -18,7 +18,8 @@ public class playerscr : MonoBehaviour
     //yump
     [SerializeField] float jump = 5f;
     bool grounded;
-    [SerializeField] Transform groundCheck;
+    [SerializeField] Transform groundCheckL;
+    [SerializeField] Transform groundCheckR;
     [SerializeField] float groundRadius = 0.1f;
     [SerializeField] LayerMask groundLayer;
 
@@ -32,21 +33,23 @@ public class playerscr : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.DrawLine(
+        /*
+        Debug.DrawLine(//shows feet location
             transform.position,
             groundCheck.position,
             Color.red
         );
-        Debug.DrawRay(
+        Debug.DrawRay(//shows where relative down is
             groundCheck.position,
             GravityManager.Instance.relativeDown,
             Color.blue
         );
+        */
         //horizontal motion, horizontal is calculated, vertical is same
         rb.linearVelocity = (GravityManager.Instance.relativeRight * (movex * speed)) + (GravityManager.Instance.relativeDown * Vector2.Dot(rb.linearVelocity, GravityManager.Instance.relativeDown));
 
         //fancy way to do grounding according to ai
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, groundLayer);
+        grounded = Physics2D.OverlapCircle(groundCheckL.position, groundRadius, groundLayer) || Physics2D.OverlapCircle(groundCheckR.position, groundRadius, groundLayer);
         if (grounded)//look at later
         {
             timer = coyote;
@@ -59,7 +62,6 @@ public class playerscr : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(timer + " " + movey + " " + grounded);
         //yump
         if (timer > 0f && movey > 0)
         {
