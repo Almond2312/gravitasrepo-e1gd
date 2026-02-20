@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 //testpush
 public class playerscr : MonoBehaviour
@@ -26,6 +28,8 @@ public class playerscr : MonoBehaviour
     [SerializeField] float coyote = .1f;
     float timer;
 
+    // Checkpoint
+    public UnityEvent playerDeath;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,5 +93,12 @@ public class playerscr : MonoBehaviour
         //darker than black magic, practically necromancy
         //unity uses quaternions, quaternion.euler is just putting the sensible angle from earlier into the nonsense
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Death"))
+        {
+            playerDeath.Invoke();
+        }
     }
 }
