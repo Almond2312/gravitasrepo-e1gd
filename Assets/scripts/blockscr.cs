@@ -24,6 +24,7 @@ public class blockscr : MonoBehaviour
 
     void FixedUpdate()
     {
+        rb.linearVelocity = GravityManager.terminalV(rb.linearVelocity);
         if (touching > 0)
         {
             rb.linearVelocity = GravityManager.getVComp(rb.linearVelocity);

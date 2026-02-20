@@ -46,8 +46,9 @@ public class playerscr : MonoBehaviour
         );
         */
         //horizontal motion, horizontal is calculated, vertical is same
+        
         rb.linearVelocity = (GravityManager.Instance.relativeRight * (movex * speed)) + (GravityManager.Instance.relativeDown * Vector2.Dot(rb.linearVelocity, GravityManager.Instance.relativeDown));
-
+        rb.linearVelocity = GravityManager.terminalV(rb.linearVelocity);
         //fancy way to do grounding according to ai
         grounded = Physics2D.OverlapCircle(groundCheckL.position, groundRadius, groundLayer) || Physics2D.OverlapCircle(groundCheckR.position, groundRadius, groundLayer);
         if (grounded)//look at later

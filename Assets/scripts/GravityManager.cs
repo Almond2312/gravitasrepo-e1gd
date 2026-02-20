@@ -13,6 +13,7 @@ public class GravityManager : MonoBehaviour
     public Vector2 relativeRight;
 
     [SerializeField] private float gravStrength = -27f;
+    [SerializeField] public float tv = 20f;
 
     private void Awake()
     {
@@ -41,7 +42,7 @@ public class GravityManager : MonoBehaviour
         dir = dir.normalized;//sometimes funny business happens.
         relativeDown = dir;//proud i came up with public relative directions will be super useful
         relativeUp = -dir;
-        relativeLeft = -Vector2.Perpendicular(dir);
+        relativeLeft = -Vector2.Perpendicular(dir).normalized;
         relativeRight = -relativeLeft;
         Physics2D.gravity = relativeDown * gravStrength;
     }
@@ -54,5 +55,14 @@ public class GravityManager : MonoBehaviour
     public static Vector2 getHComp(Vector2 linearV)
     {
         return GravityManager.Instance.relativeRight * Vector2.Dot(linearV, GravityManager.Instance.relativeRight);
+    }
+
+    public static Vector2 terminalV(Vector2 linearV)
+    {
+        if (getVComp(linearV).magnitude > GravityManager.Instance.tv)
+        {
+            return getHComp(linearV) + (GravityManager.Instance.relativeDown * GravityManager.Instance.tv);
+        }
+        return linearV;
     }
 }
