@@ -46,4 +46,13 @@ public class GravityManager : MonoBehaviour
         Physics2D.gravity = relativeDown * gravStrength;
     }
 
+    public static Vector2 getVComp(Vector2 linearV)
+    {
+        return GravityManager.Instance.relativeDown * Vector2.Dot(linearV, GravityManager.Instance.relativeDown);
+    }
+
+    public static Vector2 getHComp(Vector2 linearV)
+    {
+        return GravityManager.Instance.relativeRight * Vector2.Dot(linearV, GravityManager.Instance.relativeRight);
+    }
 }

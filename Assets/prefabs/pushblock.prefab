@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 983964644896475731}
   - component: {fileID: 1707217715311013124}
   - component: {fileID: 8130348798427703219}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: pushblock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

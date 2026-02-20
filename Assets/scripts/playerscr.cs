@@ -65,7 +65,6 @@ public class playerscr : MonoBehaviour
         //yump
         if (timer > 0f && movey > 0)
         {
-            Debug.Log("jump");
             Vector2 jd = GravityManager.Instance.relativeUp;
             rb.linearVelocity = jd * jump;
         }
