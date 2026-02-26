@@ -94,11 +94,4 @@ public class playerscr : MonoBehaviour
         //unity uses quaternions, quaternion.euler is just putting the sensible angle from earlier into the nonsense
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Death"))
-        {
-            playerDeath.Invoke();
-        }
-    }
 }
