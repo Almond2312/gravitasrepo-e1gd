@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 //testpush
@@ -29,10 +30,13 @@ public class playerscr : MonoBehaviour
     float timer;
 
     // Checkpoint
-    public UnityEvent playerDeath;
+    // public UnityEvent playerDeath;
+    Vector2 checkpointPosition;
+    [SerializeField] float respawnOffset = 1f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        checkpointPosition = transform.position;
     }
 
     void FixedUpdate()
@@ -93,5 +97,35 @@ public class playerscr : MonoBehaviour
         //darker than black magic, practically necromancy
         //unity uses quaternions, quaternion.euler is just putting the sensible angle from earlier into the nonsense
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public void SetCheckpoint(Vector2 basePosition)
+    {
+        checkpointPosition = basePosition + (GravityManager.Instance.relativeUp * respawnOffset);
+    }
+
+    public void Respawn()
+    {
+        Vector2 targetPos = checkpointPosition;
+
+        rb.linearVelocity = Vector2.zero;
+        transform.position = targetPos;
+
+        // Check if the spot is free
+        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.3f, LayerMask.GetMask("Ground"));
+        if (hit != null)
+        {
+            // if spawn it blocked, reset level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        // If player touches death
+        if (other.CompareTag("Death"))
+        {
+            Respawn();
+        }
     }
 }
