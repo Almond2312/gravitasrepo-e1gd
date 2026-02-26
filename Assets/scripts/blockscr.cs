@@ -3,11 +3,11 @@ using UnityEngine;
 public class blockscr : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private float touching;
+    private int touching;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touching = 0f;
+        touching = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

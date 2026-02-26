@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8130348798427703219}
   m_Layer: 3
   m_Name: pushblock
-  m_TagString: Untagged
+  m_TagString: Pushblock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
