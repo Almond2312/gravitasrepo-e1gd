@@ -100,6 +100,11 @@ public class playerscr : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
+    public void SetCheckpoint(Vector2 basePosition)
+    {
+        checkpointPosition = basePosition + (GravityManager.Instance.relativeUp * respawnOffset);
+    }
+
     public void Respawn()
     {
         Vector2 targetPos;
