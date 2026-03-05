@@ -33,6 +33,7 @@ public class playerscr : MonoBehaviour
     // public UnityEvent playerDeath;
     Vector2 checkpointPosition;
     [SerializeField] float respawnOffset = 1f;
+    [SerializeField] GameObject currentRespawnAnchor;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -99,24 +100,30 @@ public class playerscr : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    public void SetCheckpoint(Vector2 basePosition)
-    {
-        checkpointPosition = basePosition + (GravityManager.Instance.relativeUp * respawnOffset);
-    }
-
     public void Respawn()
     {
-        Vector2 targetPos = checkpointPosition;
+        Vector2 targetPos;
+        if (currentRespawnAnchor == null)
+        {
+            targetPos = checkpointPosition;
+        }
+        else
+        {
+            targetPos = (Vector2)currentRespawnAnchor.transform.position +
+                (Vector2)(GravityManager.Instance.relativeUp * respawnOffset);
+        }
 
         rb.linearVelocity = Vector2.zero;
         transform.position = targetPos;
 
         // Check if the spot is free
-        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.3f, LayerMask.GetMask("Ground"));
+        Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.3f, LayerMask.GetMask("ground"));
         if (hit != null)
         {
-            // if spawn it blocked, reset level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // if spawn is blocked, respawn to beginning
+            targetPos = checkpointPosition;
+            rb.linearVelocity = Vector2.zero;
+            transform.position = targetPos;
         }
     }
 
@@ -126,6 +133,11 @@ public class playerscr : MonoBehaviour
         if (other.CompareTag("Death"))
         {
             Respawn();
+        }
+        // If player touches Repawn
+        if (other.CompareTag("Respawn"))
+        {
+            currentRespawnAnchor = other.gameObject;
         }
     }
 }
