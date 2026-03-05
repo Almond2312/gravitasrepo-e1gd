@@ -3,12 +3,11 @@ using UnityEngine;
 public class Buttonscr : MonoBehaviour
 {
     [SerializeField] private bool isToggle;
-    [SerializeField] private int soloId;
-    [SerializeField] private int groupId;
-    [SerializeField] private int internalGroupId;
+    [SerializeField] private int Id;
     private bool on;
     private Animator a;
     private int touching;
+    public static event System.Action<int, bool> ButtonPressed;//the int is the id, the bool is the state
 
     private void Awake()//Awake is for initialization involving only self referential parts. Start is safer to run things 
     {//that reference other objects. Like say the button wanted to get a block object, maybe by chance the block is made
@@ -21,13 +20,15 @@ public class Buttonscr : MonoBehaviour
     private void visualUpdate()
     {
         a.SetBool("On", on);
-        a.SetBool("IsToggle", isToggle);//the first one references the name in the parameter, the second is the script variable
+        a.SetBool("IsToggle", isToggle);
+        //the first parameter references the name in the unity editor, the second is the script variable
     }
 
     public void setState(bool state)
     {
         on = state;
         visualUpdate();
+        ButtonPressed?.Invoke(Id, on);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -66,6 +67,6 @@ public class Buttonscr : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(isToggle + " " + soloId + " " + groupId + " " + on + " " + touching);
+        //Debug.Log(isToggle + " " + on + " " + touching);
     }
 }

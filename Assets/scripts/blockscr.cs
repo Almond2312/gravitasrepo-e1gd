@@ -4,6 +4,7 @@ public class blockscr : MonoBehaviour
 {
     private Rigidbody2D rb;
     private int touching;
+    Collision2D c;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -12,6 +13,7 @@ public class blockscr : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        c = collision;
         //Debug.Log("Collided with: " + collision.gameObject.name);
         //rb.linearVelocity = Vector2.zero;
         touching++;
@@ -24,6 +26,7 @@ public class blockscr : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Debug.Log("Touching: " + c);
         rb.linearVelocity = GravityManager.terminalV(rb.linearVelocity);
         if (touching > 0)
         {
