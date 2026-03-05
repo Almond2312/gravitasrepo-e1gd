@@ -49,7 +49,7 @@ public class Doorscr : MonoBehaviour
         {
             buttonStates[id] = state;
             updateOpen();
-            Debug.Log("Door " + gameObject.name + " received button press from button " + id + " with state " + state);
+            //Debug.Log("Door " + gameObject.name + " received button press from button " + id + " with state " + state);
         }
     }
 

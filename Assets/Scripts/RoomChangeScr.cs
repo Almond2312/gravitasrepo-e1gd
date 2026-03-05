@@ -16,7 +16,7 @@ public class RoomChangeScr : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("call movecam");
+            //Debug.Log("call movecam");
             c.moveCam(end, size);
         }//if
     }//triggerenter

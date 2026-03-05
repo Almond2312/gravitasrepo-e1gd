@@ -32,7 +32,7 @@ public class CamMovescr : MonoBehaviour
         {
             return;
         }
-        Debug.Log("moving");
+        //Debug.Log("moving");
         Vector3 e = end.position;
         e.z = transform.position.z;
         transform.position = Vector3.SmoothDamp(transform.position, e, ref v, time);

@@ -26,7 +26,7 @@ public class blockscr : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log("Touching: " + c);
+        //Debug.Log(rb.linearVelocity);
         rb.linearVelocity = GravityManager.terminalV(rb.linearVelocity);
         if (touching > 0)
         {
