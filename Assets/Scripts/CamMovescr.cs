@@ -55,6 +55,7 @@ public class CamMovescr : MonoBehaviour
     private void Start()
     {
         c = GetComponent<Camera>();
+        SetAspectRatio();
     }
 
     void Update()
