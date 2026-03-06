@@ -1790,6 +1790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamMovescr
   time: 0.4
+  targetAspect: 1.7777778
 --- !u!1001 &667063292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1802,6 +1803,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 6741248431613308994, guid: 8b05270f2672d754fa9f05752c3af34f, type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b3f4106be936b2f4a86a7767cb2e931b, type: 3}
     - target: {fileID: 6991684206854358782, guid: 8b05270f2672d754fa9f05752c3af34f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.5

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,10 @@ public class playerscr : MonoBehaviour
     Vector2 checkpointPosition;
     [SerializeField] float respawnOffset = 1f;
     [SerializeField] GameObject currentRespawnAnchor;
+
+    // Audio
+    public AudioClip clip;
+    private AudioSource audioSource;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -138,6 +143,7 @@ public class playerscr : MonoBehaviour
         if (other.CompareTag("Death"))
         {
             Respawn();
+            audioSource.PlayOneShot(clip);
         }
         // If player touches Repawn
         if (other.CompareTag("Respawn"))
