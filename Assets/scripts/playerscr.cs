@@ -37,12 +37,19 @@ public class playerscr : MonoBehaviour
     [SerializeField] GameObject currentRespawnAnchor;
 
     // Audio
-    public AudioClip clip;
+    public AudioClip Death_Sound;
+    public AudioClip Background_Music;
     private AudioSource audioSource;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         checkpointPosition = transform.position;
+
+        //Background Music
+        audioSource.clip = Background_Music;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     void FixedUpdate()
@@ -142,8 +149,8 @@ public class playerscr : MonoBehaviour
         // If player touches death
         if (other.CompareTag("Death"))
         {
+            audioSource.PlayOneShot(Death_Sound);
             Respawn();
-            audioSource.PlayOneShot(clip);
         }
         // If player touches Repawn
         if (other.CompareTag("Respawn"))
