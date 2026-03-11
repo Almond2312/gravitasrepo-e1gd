@@ -1,5 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
+//a 1x1 tile. whatever direction it is touched from, it changes gravity so that relative direction is up. eg, hit from left, left is now up
+//only functions when a grav manager is present in the scene.
 
 public class gravchangerscr : MonoBehaviour
 {

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+//easy enough to use, just make sure cammovescr is on the camera, and give it a transform for the center of the room its going to
 
 public class RoomChangeScr : MonoBehaviour
 {

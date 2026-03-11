@@ -1,4 +1,7 @@
 using UnityEngine;
+//each button should match a door id 
+//buttons are background so you cant land on them, they are 1x1 tile
+
 
 public class Buttonscr : MonoBehaviour
 {

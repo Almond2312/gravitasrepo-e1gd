@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+//i do not believe this is used in the checkpoint system? not my code
 
 public class SetCheckPoint : MonoBehaviour
 {

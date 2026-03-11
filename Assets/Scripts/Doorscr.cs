@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+//door opens when its id matches a button id that is hit. multiid is for when multiple buttons are needed for one door, multiple doors to one button
+//is as simple as having multiple doors with the same id
+//functions from any direction, closes when the buttons that open it stop being on, 1x1 tile size
 
 public class Doorscr : MonoBehaviour
 {

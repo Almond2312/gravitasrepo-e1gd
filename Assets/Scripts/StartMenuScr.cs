@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//just the start menu, nothing else
 
 public class StartMenuScr : MonoBehaviour
 {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//only for the test level, not ingame
 
 public class rbuttonscr : MonoBehaviour
 {

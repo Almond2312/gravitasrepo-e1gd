@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
-//testpush
+//can interact with everything, slightly less than 1x1 tile, checkpoint code is also in here
+
 public class playerscr : MonoBehaviour
 {
     //movement script

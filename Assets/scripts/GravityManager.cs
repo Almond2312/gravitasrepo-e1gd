@@ -1,4 +1,5 @@
 using UnityEngine;
+//necessary for grav changers to work, but doesnt need anything fancy other than existing
 
 public class GravityManager : MonoBehaviour
 {

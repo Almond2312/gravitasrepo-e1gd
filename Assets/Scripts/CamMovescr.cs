@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+//camera movement used by the camera roomchangescr, needs to be put on the camera object
 
 public class CamMovescr : MonoBehaviour
 {

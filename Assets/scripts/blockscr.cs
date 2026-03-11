@@ -1,4 +1,6 @@
 using UnityEngine;
+//pushable by the player. can hit buttons, affected by changing gravity, does not affect grav changers
+//slightly less than 1x1 tile
 
 public class blockscr : MonoBehaviour
 {
