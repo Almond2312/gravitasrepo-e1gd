@@ -9,6 +9,8 @@ public class gravchangerscr : MonoBehaviour
     private bool touching = false;
     Collider2D player;
     //private bool once = false;
+    float a;
+    Vector2 p;
 
     public void gravChange(Vector2 dir)
     {
@@ -36,17 +38,40 @@ public class gravchangerscr : MonoBehaviour
     }
     private void Update()
     {
-        //grav change is done in update because it needs to run repeatedly to ignore corners.
+        //change arrow direction
+        if (p != GravityManager.Instance.relativeDown)
+        {
+            if (GravityManager.Instance.relativeDown == Vector2.down)
+            {
+                a = 0;
+            }
+            else if (GravityManager.Instance.relativeDown == Vector2.left)
+            {
+                a = 270;
+            }
+            else if (GravityManager.Instance.relativeDown == Vector2.up)
+            {
+                a = 180;
+            }
+            else if (GravityManager.Instance.relativeDown == Vector2.right)
+            {
+                a = 90;
+            }//elseif
+            p = GravityManager.Instance.relativeDown;
+            transform.rotation = Quaternion.Euler(0, 0, a);
+        }//rotate if
+
+        //grav change is done in update because it needs to run repeatedly to ignore corners. if makes it less costly
         if (!touching)
         {
             return;
         }
         Vector2 d = player.transform.position - transform.position;
         
-        //if (!once)
-        //{
-            //Debug.Log(d + " " + (Mathf.Abs(d.x) - Mathf.Abs(d.y)) + " " + (Mathf.Abs((Mathf.Abs(d.x) - Mathf.Abs(d.y))) <= cutcorner));
-        //}bugfixing
+        /*if (!once)
+        {
+            Debug.Log(d + " " + (Mathf.Abs(d.x) - Mathf.Abs(d.y)) + " " + (Mathf.Abs((Mathf.Abs(d.x) - Mathf.Abs(d.y))) <= cutcorner));
+        }*/
 
         //ignore corners. approaching from side will have a larger difference between x and y than cutcorner.
         //cutcorner cuts nothing at 0, and stops block function at 1
