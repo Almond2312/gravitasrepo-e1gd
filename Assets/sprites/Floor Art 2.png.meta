@@ -298,28 +298,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Floor Art 2_8
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9301a61f5be02834ebf6cf30fbc1959f
-      internalID: 1582663401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -344,7 +322,6 @@ TextureImporter:
       Floor Art 2_5: -967019015
       Floor Art 2_6: 383191255
       Floor Art 2_7: 413917433
-      Floor Art 2_8: 1582663401
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
