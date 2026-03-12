@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 public class InGameMenu : MonoBehaviour
 {
     public GameObject optionsPanel;
+    public GameObject winMenu;
+
+    private void Start()
+    {
+        optionsPanel.SetActive(false);
+        winMenu.SetActive(false);
+    }
 
     void Update()
     {
@@ -28,5 +35,15 @@ public class InGameMenu : MonoBehaviour
     public void SetVolume(float volume)
     {
         AudioListener.volume = volume;
+    }
+
+    public void OpenWinMenu()
+    {
+        winMenu.SetActive(true);
+    }
+
+    public void CloseWinMenu()
+    {
+        winMenu.SetActive(false);
     }
 }
