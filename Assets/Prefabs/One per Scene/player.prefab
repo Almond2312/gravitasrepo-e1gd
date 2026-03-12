@@ -151,8 +151,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   coyote: 0.1
+  cutcorner: 0.15
   respawnOffset: 1
-  currentRespawnAnchor: {fileID: 0}
   Death_Sound: {fileID: 8300000, guid: 14cdcb20caa1b964d9040cb13be35fca, type: 3}
   Background_Music: {fileID: 8300000, guid: 81dbe5115d5ab834b943307fe2965fe6, type: 3}
 --- !u!61 &6922522719715407625
@@ -335,7 +335,7 @@ Animator:
   m_GameObject: {fileID: 3834912785041351238}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 93e8200ae6988cd4cb57613a55ac9ae1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
