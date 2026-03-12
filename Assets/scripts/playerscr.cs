@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using System.Collections;
 //can interact with everything, slightly less than 1x1 tile, checkpoint code is also in here
 
 public class playerscr : MonoBehaviour
@@ -33,9 +35,12 @@ public class playerscr : MonoBehaviour
 
     // Checkpoint
     // public UnityEvent playerDeath;
+    [SerializeField] float cutcorner = .15f;
     Vector2 checkpointPosition;
     [SerializeField] float respawnOffset = 1f;
-    [SerializeField] GameObject currentRespawnAnchor;
+    Vector2 currentRespawnAnchor;
+    Vector2 dist;
+    bool canMove = true;
 
     // Audio
     public AudioClip Death_Sound;
@@ -48,7 +53,7 @@ public class playerscr : MonoBehaviour
         checkpointPosition = transform.position;
 
         //Background Music
-        audioSource.clip = Background_Music;
+        //audioSource.clip = Background_Music;
         audioSource.loop = true;
         audioSource.Play();
     }
@@ -95,8 +100,16 @@ public class playerscr : MonoBehaviour
         timer = 0f;
     }
 
+    IEnumerator RespawnFreeze()
+    {
+        canMove = false;          // your movement script checks this
+        yield return new WaitForSeconds(0.1f);
+        canMove = true;
+    }
+
     void OnMove(InputValue value)
     {
+        if (!canMove) return;
         Vector2 v = value.Get<Vector2>();
         movex = v.x;
         movey = v.y;
@@ -120,19 +133,20 @@ public class playerscr : MonoBehaviour
 
     public void Respawn()
     {
-        Vector2 targetPos;
+        rb.linearVelocity = Vector2.zero;
+        transform.position = currentRespawnAnchor;
+        StartCoroutine(RespawnFreeze());
+        /*Vector2 targetPos;
         if (currentRespawnAnchor == null)
         {
             targetPos = checkpointPosition;
         }
         else
         {
-            targetPos = (Vector2)currentRespawnAnchor.transform.position +
-                (Vector2)(GravityManager.Instance.relativeUp * respawnOffset);
-        }
-
+            //targetPos = (Vector2)currentRespawnAnchor.transform.position + (Vector2)(GravityManager.Instance.relativeUp * respawnOffset);
+        }//relative up will be a unit vector, so * respawn offset is normal, adding it to the position of the block results in respawn on that face.
         rb.linearVelocity = Vector2.zero;
-        transform.position = targetPos;
+        transform.position = currentRespawnAnchor;
 
         // Check if the spot is free
         Collider2D hit = Physics2D.OverlapCircle(targetPos, 0.3f, LayerMask.GetMask("ground"));
@@ -143,6 +157,7 @@ public class playerscr : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             transform.position = targetPos;
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -154,9 +169,12 @@ public class playerscr : MonoBehaviour
             Respawn();
         }
         // If player touches Repawn
-        if (other.CompareTag("Respawn"))
+        dist = other.transform.position - transform.position;
+        if (other.CompareTag("Respawn") && Mathf.Abs((Mathf.Abs(dist.x) - Mathf.Abs(dist.y))) <= cutcorner)
         {
-            currentRespawnAnchor = other.gameObject;
+            Debug.Log("Set Respawn Anchor");
+            checkpointPosition = GravityManager.Instance.relativeUp * respawnOffset;
+            currentRespawnAnchor = other.transform.position + new Vector3(checkpointPosition.x, checkpointPosition.y, 0);
         }
     }
 }
