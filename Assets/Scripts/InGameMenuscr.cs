@@ -6,11 +6,13 @@ public class InGameMenu : MonoBehaviour
 {
     public GameObject optionsPanel;
     public GameObject winMenu;
+    public GameObject round2button;
 
     private void Start()
     {
         optionsPanel.SetActive(false);
         winMenu.SetActive(false);
+        round2button.SetActive(false);
     }
 
     void Update()
