@@ -4,8 +4,6 @@ using UnityEngine.Audio;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using System.Collections;
 //can interact with everything, slightly less than 1x1 tile, checkpoint code is also in here
 
