@@ -155,6 +155,7 @@ MonoBehaviour:
   respawnOffset: 1
   Death_Sound: {fileID: 8300000, guid: 14cdcb20caa1b964d9040cb13be35fca, type: 3}
   Background_Music: {fileID: 8300000, guid: 81dbe5115d5ab834b943307fe2965fe6, type: 3}
+  _animator: {fileID: 8751777841112585648}
 --- !u!61 &6922522719715407625
 BoxCollider2D:
   m_ObjectHideFlags: 0

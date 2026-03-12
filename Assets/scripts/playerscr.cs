@@ -48,6 +48,9 @@ public class playerscr : MonoBehaviour
     public AudioClip Death_Sound;
     public AudioClip Background_Music;
     private AudioSource audioSource;
+
+    // Animation
+    [SerializeField] private Animator _animator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -82,16 +85,27 @@ public class playerscr : MonoBehaviour
         grounded = Physics2D.OverlapCircle(groundCheckL.position, groundRadius, groundLayer) || Physics2D.OverlapCircle(groundCheckR.position, groundRadius, groundLayer);
         if (grounded)//look at later
         {
+            _animator.SetBool("isJumping", false);
             timer = coyote;
         }
         else
         {
+            _animator.SetBool("isJumping", true);
             timer -= Time.fixedDeltaTime;
         }
     }
 
     void Update()
     {
+        // Running animation
+        if (Mathf.Abs(movex) > 0.1f)
+        {
+            _animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            _animator.SetBool("isRunning", false);
+        }
         //yump
         if (timer > 0f && movey > 0)
         {
