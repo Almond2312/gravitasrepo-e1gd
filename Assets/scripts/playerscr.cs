@@ -41,6 +41,8 @@ public class playerscr : MonoBehaviour
     Vector2 currentRespawnAnchor;
     Vector2 dist;
     bool canMove = true;
+    GameObject touchingCheckpoint;
+    GameObject prevCheckpoint;
 
     // Audio
     public AudioClip Death_Sound;
@@ -98,6 +100,20 @@ public class playerscr : MonoBehaviour
         }
         AlignToGravity();
         timer = 0f;
+
+        if (touchingCheckpoint != null && touchingCheckpoint != prevCheckpoint)
+        {
+            dist = touchingCheckpoint.transform.position - transform.position;
+            if (Mathf.Abs((Mathf.Abs(dist.x) - Mathf.Abs(dist.y))) >= cutcorner)
+            {
+                prevCheckpoint = touchingCheckpoint;
+                checkpointPosition = GravityManager.Instance.relativeUp * respawnOffset;
+                currentRespawnAnchor = touchingCheckpoint.transform.position + new Vector3(checkpointPosition.x, checkpointPosition.y, 0);
+                Debug.Log("checkpointspot: " + touchingCheckpoint.transform.position);
+                Debug.Log("relativespot: " + (Vector2)touchingCheckpoint.transform.position);
+                Debug.Log("relativedirect: " + (currentRespawnAnchor - (Vector2)touchingCheckpoint.transform.position));
+            }
+        }
     }
 
     IEnumerator RespawnFreeze()
@@ -169,12 +185,17 @@ public class playerscr : MonoBehaviour
             Respawn();
         }
         // If player touches Repawn
-        dist = other.transform.position - transform.position;
-        if (other.CompareTag("Respawn") && Mathf.Abs((Mathf.Abs(dist.x) - Mathf.Abs(dist.y))) <= cutcorner)
+        if (other.CompareTag("Respawn"))
         {
-            Debug.Log("Set Respawn Anchor");
-            checkpointPosition = GravityManager.Instance.relativeUp * respawnOffset;
-            currentRespawnAnchor = other.transform.position + new Vector3(checkpointPosition.x, checkpointPosition.y, 0);
+            touchingCheckpoint = other.gameObject;
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Respawn"))
+            {
+                touchingCheckpoint = null;
+            }
     }
 }
