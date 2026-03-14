@@ -44,7 +44,7 @@ public class playerscr : MonoBehaviour
 
     // Audio
     public AudioClip Death_Sound;
-    public AudioClip Background_Music;
+    //public AudioClip Background_Music;
     private AudioSource audioSource;
 
     // Animation
@@ -55,10 +55,10 @@ public class playerscr : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         checkpointPosition = transform.position;
 
-        //Background Music
+        // Background Music
         //audioSource.clip = Background_Music;
-        audioSource.loop = true;
-        audioSource.Play();
+        //audioSource.loop = true;
+        //audioSource.Play();
     }
 
     void FixedUpdate()
@@ -121,9 +121,9 @@ public class playerscr : MonoBehaviour
                 prevCheckpoint = touchingCheckpoint;
                 checkpointPosition = GravityManager.Instance.relativeUp * respawnOffset;
                 currentRespawnAnchor = touchingCheckpoint.transform.position + new Vector3(checkpointPosition.x, checkpointPosition.y, 0);
-                Debug.Log("checkpointspot: " + touchingCheckpoint.transform.position);
-                Debug.Log("relativespot: " + (Vector2)touchingCheckpoint.transform.position);
-                Debug.Log("relativedirect: " + (currentRespawnAnchor - (Vector2)touchingCheckpoint.transform.position));
+                //Debug.Log("checkpointspot: " + touchingCheckpoint.transform.position);
+                //Debug.Log("relativespot: " + (Vector2)touchingCheckpoint.transform.position);
+                //Debug.Log("relativedirect: " + (currentRespawnAnchor - (Vector2)touchingCheckpoint.transform.position));
             }
         }
     }

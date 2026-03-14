@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 //camera movement used by the camera roomchangescr, needs to be put on the camera object
 
 public class CamMovescr : MonoBehaviour
@@ -12,6 +13,11 @@ public class CamMovescr : MonoBehaviour
     private float size;
     Camera c;
     [SerializeField] float targetAspect = 16f / 9f;
+
+    // Background
+    [SerializeField] Transform background;
+    [SerializeField] float baseCamSize = 5f;
+    [SerializeField] Vector3 baseScale = Vector3.one;
     public void moveCam(Transform T, float s)
     {
         //Debug.Log("in movecam");
@@ -57,6 +63,9 @@ public class CamMovescr : MonoBehaviour
     {
         c = GetComponent<Camera>();
         SetAspectRatio();
+
+        baseCamSize = c.orthographicSize;
+        baseScale = background.localScale;
     }
 
     void Update()
@@ -70,6 +79,10 @@ public class CamMovescr : MonoBehaviour
         e.z = transform.position.z;
         transform.position = Vector3.SmoothDamp(transform.position, e, ref v, time);
         c.orthographicSize = Mathf.SmoothDamp(c.orthographicSize, size, ref sV, time);
+
+        float scaleFactor = c.orthographicSize / baseCamSize;
+        background.localScale = baseScale * scaleFactor;
+
         if (Vector3.Distance(transform.position, e) < 0.01f)
         {
             moving = false;

@@ -14,6 +14,8 @@ public class Doorscr : MonoBehaviour
     private bool open;
     private Collider2D col;
 
+    [SerializeField] private bool permanentlyClosed = false;
+
     void Awake()
     {
         col = GetComponent<Collider2D>();
@@ -58,6 +60,8 @@ public class Doorscr : MonoBehaviour
 
     private void updateOpen()
     {
+        if (permanentlyClosed) return; // ignore buttons forever
+
         bool newOpen = true;
         foreach (bool state in buttonStates.Values)
         {
@@ -75,4 +79,20 @@ public class Doorscr : MonoBehaviour
             col.enabled = !open;
         }//if
     }//updateOpen
+
+    public void LockDoor()
+    {
+        if(permanentlyClosed) return;
+        permanentlyClosed = true;
+        open = false;
+        a.SetBool("Open", false);
+        col.enabled = true;
+    }
+    public void UnlockDoor()
+    {
+        permanentlyClosed = true;  // ignore all future button updates
+        open = true;               // door is open
+        a.SetBool("Open", true);   // play open animation
+        col.enabled = false;       // let player pass
+    }
 }
